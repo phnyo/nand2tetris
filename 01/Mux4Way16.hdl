@@ -1,0 +1,187 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/01/Mux4Way16.hdl
+
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel == 00
+ *       b if sel == 01
+ *       c if sel == 10
+ *       d if sel == 11
+ */
+
+CHIP Mux4Way16 {
+    IN a[16], b[16], c[16], d[16], sel[2];
+    OUT out[16];
+
+    PARTS:
+    // Preprocessing
+    Not(in=sel[0], out=nsel0);
+    Not(in=sel[1], out=nsel1);
+    
+    And(a=nsel0, b=nsel1, out=a0);
+    And(a=sel[0], b=nsel1, out=b0);
+    And(a=nsel0, b=sel[1], out=c0);
+    And(a=sel[0], b=sel[1], out=d0);
+
+    // 1st 
+    And(a=a0, b=a[0], out=resa0);
+    And(a=b0, b=b[0], out=resb0);
+    And(a=c0, b=c[0], out=resc0);
+    And(a=d0, b=d[0], out=resd0);
+
+    Or(a=resa0, b=resb0, out=resab0);
+    Or(a=resc0, b=resd0, out=rescd0);
+    Or(a=resab0, b=rescd0, out=out[0]);
+
+    // 2nd
+    And(a=a0, b=a[1], out=resa1);
+    And(a=b0, b=b[1], out=resb1);
+    And(a=c0, b=c[1], out=resc1);
+    And(a=d0, b=d[1], out=resd1);
+
+    Or(a=resa1, b=resb1, out=resab1);
+    Or(a=resc1, b=resd1, out=rescd1);
+    Or(a=resab1, b=rescd1, out=out[1]);
+    
+    // 3rd 
+    And(a=a0, b=a[2], out=resa2);
+    And(a=b0, b=b[2], out=resb2);
+    And(a=c0, b=c[2], out=resc2);
+    And(a=d0, b=d[2], out=resd2);
+
+    Or(a=resa2, b=resb2, out=resab2);
+    Or(a=resc2, b=resd2, out=rescd2);
+    Or(a=resab2, b=rescd2, out=out[2]);
+    
+    // 4th 
+    And(a=a0, b=a[3], out=resa3);
+    And(a=b0, b=b[3], out=resb3);
+    And(a=c0, b=c[3], out=resc3);
+    And(a=d0, b=d[3], out=resd3);
+
+    Or(a=resa3, b=resb3, out=resab3);
+    Or(a=resc3, b=resd3, out=rescd3);
+    Or(a=resab3, b=rescd3, out=out[3]);
+
+    // 5th 
+    And(a=a0, b=a[4], out=resa4);
+    And(a=b0, b=b[4], out=resb4);
+    And(a=c0, b=c[4], out=resc4);
+    And(a=d0, b=d[4], out=resd4);
+
+    Or(a=resa4, b=resb4, out=resab4);
+    Or(a=resc4, b=resd4, out=rescd4);
+    Or(a=resab4, b=rescd4, out=out[4]);
+
+    // 6th 
+    And(a=a0, b=a[5], out=resa5);
+    And(a=b0, b=b[5], out=resb5);
+    And(a=c0, b=c[5], out=resc5);
+    And(a=d0, b=d[5], out=resd5);
+
+    Or(a=resa5, b=resb5, out=resab5);
+    Or(a=resc5, b=resd5, out=rescd5);
+    Or(a=resab5, b=rescd5, out=out[5]);
+
+    // 7th 
+    And(a=a0, b=a[6], out=resa6);
+    And(a=b0, b=b[6], out=resb6);
+    And(a=c0, b=c[6], out=resc6);
+    And(a=d0, b=d[6], out=resd6);
+
+    Or(a=resa6, b=resb6, out=resab6);
+    Or(a=resc6, b=resd6, out=rescd6);
+    Or(a=resab6, b=rescd6, out=out[6]);
+
+    // 8th 
+    And(a=a0, b=a[7], out=resa7);
+    And(a=b0, b=b[7], out=resb7);
+    And(a=c0, b=c[7], out=resc7);
+    And(a=d0, b=d[7], out=resd7);
+
+    Or(a=resa7, b=resb7, out=resab7);
+    Or(a=resc7, b=resd7, out=rescd7);
+    Or(a=resab7, b=rescd7, out=out[7]);
+
+    // 9th 
+    And(a=a0, b=a[8], out=resa8);
+    And(a=b0, b=b[8], out=resb8);
+    And(a=c0, b=c[8], out=resc8);
+    And(a=d0, b=d[8], out=resd8);
+
+    Or(a=resa8, b=resb8, out=resab8);
+    Or(a=resc8, b=resd8, out=rescd8);
+    Or(a=resab8, b=rescd8, out=out[8]);
+
+    // 10th 
+    And(a=a0, b=a[9], out=resa9);
+    And(a=b0, b=b[9], out=resb9);
+    And(a=c0, b=c[9], out=resc9);
+    And(a=d0, b=d[9], out=resd9);
+
+    Or(a=resa9, b=resb9, out=resab9);
+    Or(a=resc9, b=resd9, out=rescd9);
+    Or(a=resab9, b=rescd9, out=out[9]);
+
+    // 11th 
+    And(a=a0, b=a[10], out=resa10);
+    And(a=b0, b=b[10], out=resb10);
+    And(a=c0, b=c[10], out=resc10);
+    And(a=d0, b=d[10], out=resd10);
+
+    Or(a=resa10, b=resb10, out=resab10);
+    Or(a=resc10, b=resd10, out=rescd10);
+    Or(a=resab10, b=rescd10, out=out[10]);
+    
+    // 12th 
+    And(a=a0, b=a[11], out=resa11);
+    And(a=b0, b=b[11], out=resb11);
+    And(a=c0, b=c[11], out=resc11);
+    And(a=d0, b=d[11], out=resd11);
+
+    Or(a=resa11, b=resb11, out=resab11);
+    Or(a=resc11, b=resd11, out=rescd11);
+    Or(a=resab11, b=rescd11, out=out[11]);
+
+    // 13th 
+    And(a=a0, b=a[12], out=resa12);
+    And(a=b0, b=b[12], out=resb12);
+    And(a=c0, b=c[12], out=resc12);
+    And(a=d0, b=d[12], out=resd12);
+
+    Or(a=resa12, b=resb12, out=resab12);
+    Or(a=resc12, b=resd12, out=rescd12);
+    Or(a=resab12, b=rescd12, out=out[12]);
+
+    // 14th 
+    And(a=a0, b=a[13], out=resa13);
+    And(a=b0, b=b[13], out=resb13);
+    And(a=c0, b=c[13], out=resc13);
+    And(a=d0, b=d[13], out=resd13);
+
+    Or(a=resa13, b=resb13, out=resab13);
+    Or(a=resc13, b=resd13, out=rescd13);
+    Or(a=resab13, b=rescd13, out=out[13]);
+
+    // 15th 
+    And(a=a0, b=a[14], out=resa14);
+    And(a=b0, b=b[14], out=resb14);
+    And(a=c0, b=c[14], out=resc14);
+    And(a=d0, b=d[14], out=resd14);
+
+    Or(a=resa14, b=resb14, out=resab14);
+    Or(a=resc14, b=resd14, out=rescd14);
+    Or(a=resab14, b=rescd14, out=out[14]);
+
+    // 16th 
+    And(a=a0, b=a[15], out=resa15);
+    And(a=b0, b=b[15], out=resb15);
+    And(a=c0, b=c[15], out=resc15);
+    And(a=d0, b=d[15], out=resd15);
+
+    Or(a=resa15, b=resb15, out=resab15);
+    Or(a=resc15, b=resd15, out=rescd15);
+    Or(a=resab15, b=rescd15, out=out[15]);
+}
